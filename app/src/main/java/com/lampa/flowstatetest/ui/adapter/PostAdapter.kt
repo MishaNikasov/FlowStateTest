@@ -12,7 +12,7 @@ import com.lampa.flowstatetest.network.model.PostResponseItem
 class PostAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val interaction: Interaction? = null
+    var interaction: Interaction? = null
 
     private val callback = object : DiffUtil.ItemCallback<PostResponseItem>() {
 
@@ -33,6 +33,8 @@ class PostAdapter :
 
     private val differ = AsyncListDiffer(this, callback)
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return PostViewHolder(
@@ -43,7 +45,7 @@ class PostAdapter :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is PostViewHolder -> {
-                holder.bind(differ.currentList.get(position))
+                holder.bind(differ.currentList[position])
             }
         }
     }
@@ -61,12 +63,11 @@ class PostAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PostResponseItem) = with(itemView) {
-
             binding.post = item
-
             itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
+            binding.executePendingBindings()
         }
     }
 

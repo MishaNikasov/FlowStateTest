@@ -1,11 +1,14 @@
 package com.lampa.flowstatetest.di
 
+import android.content.Context
 import com.lampa.flowstatetest.BuildConfig
-import com.lampa.flowstatetest.network.Api
+import com.lampa.flowstatetest.network.PostApi
+import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -18,7 +21,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit() : Retrofit{
+    fun provideRetrofit(@ApplicationContext context: Context) : Retrofit{
 
         val requestInterceptor = Interceptor { chain ->
             val url = chain.request()
@@ -38,6 +41,7 @@ object NetworkModule {
         }
 
         val okHttpClient = OkHttpClient.Builder()
+            .addNetworkInterceptor(ChuckInterceptor(context))
             .addInterceptor(requestInterceptor)
             .build()
 
@@ -50,8 +54,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideWeatherApi(retrofit: Retrofit) : Api{
-        return retrofit.create(Api::class.java)
+    fun provideWeatherApi(retrofit: Retrofit) : PostApi{
+        return retrofit.create(PostApi::class.java)
     }
 
 }

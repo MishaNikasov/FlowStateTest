@@ -1,37 +1,38 @@
-package com.lampa.flowstatetest.ui.fragment
+package com.lampa.flowstatetest.ui.fragment.post
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.lampa.flowstatetest.R
-import com.lampa.flowstatetest.databinding.FragmentHomeBinding
-import com.lampa.flowstatetest.extensions.showToast
+import com.lampa.flowstatetest.databinding.FragmentPostListBinding
+import com.lampa.flowstatetest.network.model.PostResponseItem
+import com.lampa.flowstatetest.ui.adapter.PostAdapter
+import com.lampa.flowstatetest.ui.fragment.base.BaseFragment
 import com.lampa.flowstatetest.ui.utils.UiState
-import com.lampa.flowstatetest.viewmodel.HomeViewModel
+import com.lampa.flowstatetest.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-class HomeFragment: BaseFragment() {
+@AndroidEntryPoint
+class PostListFragment: BaseFragment<FragmentPostListBinding>() {
 
-    private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: PostViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_list, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.postInteraction = postInteraction
         return binding.root
     }
 
@@ -48,13 +49,13 @@ class HomeFragment: BaseFragment() {
     }
 
     private fun loadData() {
-        if (viewModel.posts.value == null) {
-            viewModel.getData()
+        if (viewModel.postsList.value == null) {
+            viewModel.getPostList()
         }
     }
 
     private fun setupViewModelCallbacks() {
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             viewModel.state.collect { state ->
                 when (state) {
                     is UiState.Loading -> {
@@ -72,14 +73,16 @@ class HomeFragment: BaseFragment() {
             }
         }
 
-        lifecycleScope.launch {
-            viewModel.posts.collect { list ->
-                list?.forEach {
-                    it?.let {
-                        Log.d("TAG", it.title)
-                    }
-                }
+        lifecycleScope.launchWhenStarted {
+            viewModel.postsList.collect { list ->
+                binding.postList = list
             }
+        }
+    }
+
+    private val postInteraction = object : PostAdapter.Interaction {
+        override fun onItemSelected(position: Int, item: PostResponseItem) {
+            findNavController().navigate(R.id.postFragment, PostFragment.getBundle(item.id))
         }
     }
 

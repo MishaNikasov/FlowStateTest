@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/main_navigation"
+    <item android:id="@+id/post_navigation"
         android:title="Home"
-        android:icon="@android:drawable/alert_dark_frame">
+        android:icon="@drawable/ic_list">
     </item>
     <item android:id="@+id/second_navigation"
         android:title="Second"
-        android:icon="@android:drawable/presence_audio_online">
+        android:icon="@drawable/ic_chart">
     </item>
     <item android:id="@+id/third_navigation"
         android:title="Third"
-        android:icon="@android:drawable/presence_away">
+        android:icon="@drawable/ic_settings">
     </item>
 </menu>

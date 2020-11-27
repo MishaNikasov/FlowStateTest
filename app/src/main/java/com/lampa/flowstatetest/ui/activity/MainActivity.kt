@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBottomNav() {
         val graphIds = arrayListOf(
-            R.navigation.main_navigation,
+            R.navigation.post_navigation,
             R.navigation.second_navigation,
             R.navigation.third_navigation
         )

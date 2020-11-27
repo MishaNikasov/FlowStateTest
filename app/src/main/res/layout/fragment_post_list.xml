@@ -3,9 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="java.util.List"/>
         <variable
             name="viewModel"
-            type="com.lampa.flowstatetest.viewmodel.HomeViewModel" />
+            type="com.lampa.flowstatetest.viewmodel.PostViewModel" />
+        <variable
+            name="postList"
+            type="List&lt;com.lampa.flowstatetest.network.model.PostResponseItem>" />
+        <variable
+            name="postInteraction"
+            type="com.lampa.flowstatetest.ui.adapter.PostAdapter.Interaction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +22,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:postList="@{viewModel.posts.value}"
+            app:postList="@{postList}"
+            app:postInteraction="@{postInteraction}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
