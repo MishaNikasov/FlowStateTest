@@ -5,9 +5,6 @@
     <data>
         <import type="java.util.List"/>
         <variable
-            name="viewModel"
-            type="com.lampa.flowstatetest.viewmodel.PostViewModel" />
-        <variable
             name="postList"
             type="List&lt;com.lampa.flowstatetest.network.model.PostResponseItem>" />
         <variable

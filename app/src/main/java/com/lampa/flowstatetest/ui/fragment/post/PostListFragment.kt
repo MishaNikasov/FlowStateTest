@@ -31,7 +31,6 @@ class PostListFragment: BaseFragment<FragmentPostListBinding>() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_list, container, false)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
         binding.postInteraction = postInteraction
         return binding.root
     }
