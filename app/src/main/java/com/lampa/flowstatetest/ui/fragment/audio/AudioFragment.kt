@@ -1,20 +1,19 @@
-package com.lampa.flowstatetest.ui.fragment
+package com.lampa.flowstatetest.ui.fragment.audio
 
 import com.lampa.flowstatetest.R
-import com.lampa.flowstatetest.databinding.FragmentSecondBinding
 import com.lampa.flowstatetest.viewmodel.HomeViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import dagger.hilt.android.AndroidEntryPoint
+import com.lampa.flowstatetest.databinding.FragmentAudioBinding
+import com.lampa.flowstatetest.ui.fragment.BaseFragment
 
-class SecondFragment: BaseFragment() {
+class AudioFragment: BaseFragment() {
 
-    private lateinit var binding: FragmentSecondBinding
+    private lateinit var binding: FragmentAudioBinding
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -22,7 +21,7 @@ class SecondFragment: BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_second, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_audio, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }

@@ -44,13 +44,14 @@ class HomeFragment: BaseFragment() {
     }
 
     private fun setupUi() {
-
+        viewModel.parallel()
     }
 
     private fun loadData() {
-        if (viewModel.posts.value == null) {
-            viewModel.getData()
-        }
+//        viewModel.flowList()
+//        if (viewModel.posts.value == null) {
+//            viewModel.getData()
+//        }
     }
 
     private fun setupViewModelCallbacks() {

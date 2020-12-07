@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/second_navigation"
-    app:startDestination="@id/secondFragment">
+    android:id="@+id/audio_navigation"
+    app:startDestination="@id/audioFragment">
 
     <fragment
-        android:id="@+id/secondFragment"
-        tools:layout="@layout/fragment_second"
-        android:name="com.lampa.flowstatetest.ui.fragment.SecondFragment"
+        android:id="@+id/audioFragment"
+        tools:layout="@layout/fragment_audio"
+        android:name="com.lampa.flowstatetest.ui.fragment.audio.AudioFragment"
         android:label="SecondFragment" />
 </navigation>

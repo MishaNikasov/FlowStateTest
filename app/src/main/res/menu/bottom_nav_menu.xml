@@ -4,7 +4,7 @@
         android:title="Home"
         android:icon="@android:drawable/alert_dark_frame">
     </item>
-    <item android:id="@+id/second_navigation"
+    <item android:id="@+id/audio_navigation"
         android:title="Second"
         android:icon="@android:drawable/presence_audio_online">
     </item>
